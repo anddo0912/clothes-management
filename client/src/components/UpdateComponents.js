@@ -11,6 +11,7 @@ function Update() {
   const [productDate, setProductDate] = useState("");
   const [productStatus, setProductStatus] = useState(0);
   const [productDetail, setProductDetail] = useState("");
+  const [message, setMessage] = useState("");
 
   const submitUpdate = () => {
     axios.post("http://localhost:3001/createdde", {
@@ -23,6 +24,7 @@ function Update() {
       pStatus: productStatus,
     }).then(() => {
       alert('successful insert');
+      setMessage("successful insert");
     })
   };
   return (
@@ -131,6 +133,7 @@ function Update() {
                     }}
                   />
                 </div>
+                <p className="mb-4 mt-4">{message}</p>
                 <button className="btn btn-success" type="button" onClick={submitUpdate}>Save</button>
                 <button className="btn btn-danger">Cancel</button>
               </form>

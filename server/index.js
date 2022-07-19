@@ -68,10 +68,24 @@ app.post("/create", (req, res) => {
       productStatus,
     ],
     (err, result) => {
-      console.log(err);
+      if (err) {
+        console.log(err.message);
+        return res.send(err.message);
+      }
+      res.send("");
     }
   );
 });
+
+app.delete('/api/delete/:idproduct', (req, res) => {
+  const id = req.params.idproduct;
+  const sqlDelete =
+    "DELETE FROM product WHERE idproduct = ?";
+
+    db.query(sqlDelete, id, (err, result) => {
+      if (err) console.log(err)
+    })
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
