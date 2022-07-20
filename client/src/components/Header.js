@@ -9,11 +9,11 @@ class Header extends Component {
       <Navbar sticky="top" id='header'>
         <div className="container-fluid">
             <NavbarBrand href="/">MyShopping</NavbarBrand>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="Navbar">
-                <ul class="navbar-nav mr-auto" id='itemNav'>
+            <div className="collapse navbar-collapse " id="Navbar">
+                <ul className="navbar-nav mr-auto" id='itemNav'>
                     {/* <li class="nav-item"><a class="nav-link active" href="/">Home</a></li> */}
                     <li class="nav-item">
                       <NavLink className='nav-link' to={"/"}>
@@ -21,18 +21,13 @@ class Header extends Component {
                       </NavLink>
                     </li>
                     <li class="nav-item">
-                      <NavLink className='nav-link' to={"/shop"}>
-                        Shop
+                      <NavLink className='nav-link' to={"/create"}>
+                        Create
                       </NavLink>
                     </li>
                     <li class="nav-item">
-                      <NavLink className='nav-link' to={"/a"}>
-                        About
-                      </NavLink>
-                    </li>
-                    <li class="nav-item">
-                      <NavLink className='nav-link' to={"/b"}>
-                        Contact
+                      <NavLink className='nav-link' to={"/create"}>
+                        Log
                       </NavLink>
                     </li>
                     <li class="nav-item">

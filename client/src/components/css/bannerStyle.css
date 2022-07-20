@@ -8,7 +8,7 @@
 }
 
 .section-p1{
-    padding: 40px 70px;
+    padding: 10px 70px;
 }
 /* h1 {
     font-size: 50px;
@@ -94,7 +94,7 @@ button.bbtn {
 }
 
 
-@media (max-width:1286px) {
+/* @media (max-width:1286px) {
     .section-p1{
         padding: 40px 40px;
     }
@@ -197,12 +197,27 @@ button.bbtn {
     #sm-banner .box2 {
         margin-top: 20px;
     } 
-}
+} */
 
 footer {
     text-align: left;
     background-color: #222222;
-    
+    /* position:absolute;
+    left:0;
+    bottom:0;
+    right:0; */
+/* position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   color: white;
+   text-align: center; */
+
+    /* clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px; */
+
 }
 
 footer h5 {

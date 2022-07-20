@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import axios, * as others from 'axios';
+import moment from "moment";
+import { Router, Routes, Route, Link, useNavigate  } from "react-router-dom";
+import axios, * as others from "axios";
 function Update() {
   const [productName, setProductName] = useState("");
   const [productCategory, setProductCategory] = useState("");
@@ -13,20 +15,44 @@ function Update() {
   const [productDetail, setProductDetail] = useState("");
   const [message, setMessage] = useState("");
 
-  const submitUpdate = () => {
-    axios.post("http://localhost:3001/createdde", {
+  var Object = localStorage.getItem("object");
+  var product = JSON.parse(Object);
+  // let b = localStorage.getItem("title");
+  // let c = localStorage.getItem("price");
+  // let history = useNavigate();
+  console.log(product.idCategory);
+
+  useEffect(() => {
+    setProductName(product.productName);
+    setProductCategory(product.idCategory);
+    setProductPrice(product.productPrice);
+    setQuantity(product.Quantity);
+    setProductImage(product.productImage);
+    setProductDate(product.productDate);
+    setProductStatus(product.productStatus);
+  }, []);
+  let history = useNavigate();
+
+  const updateProduct = (productId) => {
+    const date = moment(productDate).format("YYYY-MM-DD");
+    console.log(date);
+    axios.put("http://localhost:3001/api/update",{
+      idproduct: productId,
       pName: productName,
       pImage: productImage,
       pPrice: productPrice,
       pQuantity: productQuantity,
-      pDate: productDate,
+      pDate: date,
       pCategory: productCategory,
       pStatus: productStatus,
-    }).then(() => {
-      alert('successful insert');
-      setMessage("successful insert");
+    }).then((response) => {
+      console.log(response.data);
+      if (response.data == "") {
+        setMessage("Updated Successfully");
+      }
     })
   };
+
   return (
     <div>
       <Header />
@@ -41,11 +67,12 @@ function Update() {
                 <div className="form-group">
                   <label> Product Name: </label>
                   <input
-                  type={"text"}
+                    value={productName}
+                    type={"text"}
                     placeholder="Product Name"
                     name="productName"
                     className="form-control"
-                    onChange = {(e) => {
+                    onChange={(e) => {
                       setProductName(e.target.value);
                     }}
                   />
@@ -54,6 +81,7 @@ function Update() {
                 <div className="form-group">
                   <label> Product Price : </label>
                   <input
+                  value={productPrice}
                     placeholder="Product Price"
                     name="productPrice"
                     className="form-control"
@@ -67,6 +95,7 @@ function Update() {
                   <div class="form-group col-md-6">
                     <label> Quantity : </label>
                     <input
+                    value={productQuantity}
                       placeholder="Quantity"
                       name="quantity"
                       className="form-control"
@@ -79,8 +108,10 @@ function Update() {
                   <div class="form-group col-md-6">
                     <label> Date : </label>
                     <input
+                    value={moment(productDate).format("YYYY-MM-DD")}
                       placeholder="Date"
                       name="dateProduct"
+                      type={"date"}
                       className="form-control"
                       onChange={(e) => {
                         setProductDate(e.target.value);
@@ -92,6 +123,7 @@ function Update() {
                 <div className="form-group">
                   <label> Product Image : </label>
                   <input
+                  value={productImage}
                     placeholder="Product Image"
                     name="productImage"
                     className="form-control"
@@ -103,6 +135,7 @@ function Update() {
                 <div className="form-group">
                   <label> Product Category : </label>
                   <input
+                  value={productCategory}
                     placeholder="Product Category"
                     name="productCategory"
                     className="form-control"
@@ -114,6 +147,7 @@ function Update() {
                 <div className="form-group">
                   <label> Product Status : </label>
                   <input
+                  value={productStatus}
                     placeholder="Product Status"
                     name="productStatus"
                     className="form-control"
@@ -122,20 +156,16 @@ function Update() {
                     }}
                   />
                 </div>
-                <div className="form-group">
-                  <label> Product Description : </label>
-                  <textarea
-                    placeholder="Product Description"
-                    name="productDescription"
-                    className="form-control"
-                    onChange={(e) => {
-                      setProductDetail(e.target.value);
-                    }}
-                  />
-                </div>
                 <p className="mb-4 mt-4">{message}</p>
-                <button className="btn btn-success" type="button" onClick={submitUpdate}>Save</button>
-                <button className="btn btn-danger">Cancel</button>
+                <button onClick={() => history("/")}className="btn btn-info mr-3">Back</button>
+                <button
+                  className="btn btn-success"
+                  type="button"
+                  onClick={() => updateProduct(product.idproduct)}
+                >
+                  Update
+                </button>
+                
               </form>
             </div>
           </div>

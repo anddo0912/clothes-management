@@ -77,15 +77,47 @@ app.post("/create", (req, res) => {
   );
 });
 
-app.delete('/api/delete/:idproduct', (req, res) => {
+app.delete("/api/delete/:idproduct", (req, res) => {
   const id = req.params.idproduct;
-  const sqlDelete =
-    "DELETE FROM product WHERE idproduct = ?";
+  const sqlDelete = "DELETE FROM product WHERE idproduct = ?";
 
-    db.query(sqlDelete, id, (err, result) => {
-      if (err) console.log(err)
-    })
-})
+  db.query(sqlDelete, id, (err, result) => {
+    if (err) console.log(err);
+  });
+});
+
+app.put("/api/update", (req, res) => {
+  const id = req.body.idproduct;
+  const productName = req.body.pName;
+  const productImage = req.body.pImage;
+  const productPrice = req.body.pPrice;
+  const productQuantity = req.body.pQuantity;
+  const productDate = req.body.pDate;
+  const idCategory = req.body.pCategory;
+  const productStatus = req.body.pStatus;
+  const sqlUpdate =
+    "Update product SET productName = ?, productImage = ?, productPrice = ?, Quantity = ?, productDate = ?, idCategory = ?, productStatus = ? WHERE idproduct = ?";
+  db.query(
+    sqlUpdate,
+    [
+      productName,
+      productImage,
+      productPrice,
+      productQuantity,
+      productDate,
+      idCategory,
+      productStatus,
+      id,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err.message);
+        return res.send(err.message);
+      }
+      res.send("");
+    }
+  );
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
