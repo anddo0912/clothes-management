@@ -77,8 +77,13 @@ function Update() {
     setQuantity(value);
   };
   const onChangeImg = (event) => {
-    const value = event.target.value;
-    setProductImage(value);
+    var files = event.target.files;
+    var filesArray = [].slice.call(files);
+    filesArray.forEach((event) => {
+      console.log(event.name.split('.')[0]);
+      const value = event.name.split('.')[0];
+      setProductImage(value);
+    });
   };
   // const validateAll = () => {
   //   const msg = {};
@@ -116,22 +121,23 @@ function Update() {
     console.log(date);
     // const isValid = validateAll();
     // if (!isValid)
-    axios.put("http://localhost:3001/api/update", {
-          idproduct: productId,
-          pName: productName,
-          pImage: productImage,
-          pPrice: productPrice,
-          pQuantity: productQuantity,
-          pDate: date,
-          pCategory: productCategory,
-          pStatus: productStatus,
-        })
-        .then((response) => {
-          console.log(response.data);
-          if (response.data == "") {
-            setMessage("Updated Successfully");
-          }
-        });
+    axios
+      .put("http://localhost:3001/api/update", {
+        idproduct: productId,
+        pName: productName,
+        pImage: productImage,
+        pPrice: productPrice,
+        pQuantity: productQuantity,
+        pDate: date,
+        pCategory: productCategory,
+        pStatus: productStatus,
+      })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data == "") {
+          setMessage("Updated Successfully");
+        }
+      });
   };
 
   return (
@@ -187,7 +193,7 @@ function Update() {
                   <div class="form-group col-md-6">
                     <label> Quantity : </label>
                     <input
-                    value={productQuantity}
+                      value={productQuantity}
                       type="number"
                       placeholder="Quantity 			  🖋"
                       name="quantity"
@@ -202,7 +208,15 @@ function Update() {
                 <div className="form-group">
                   <label> Product Image : </label>
                   <input
-                    value={productImage}
+                    // type={"file"}
+                    value={productImage + ".jpg"}
+                    placeholder="Product Image 										🖋"
+                    name="productImage"
+                    className="form-control"
+                    disabled
+                  />
+                  <input
+                    type={"file"}
                     placeholder="Product Image 										🖋"
                     name="productImage"
                     className="form-control"

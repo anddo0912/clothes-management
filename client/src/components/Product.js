@@ -13,6 +13,7 @@ function Product() {
   let history = useNavigate();
   const [show, setShow] = useState(false);
   const [ide, setIndex] = useState("");
+  const [searchItem, setSearch] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = (ide2) => {
@@ -53,11 +54,22 @@ function Product() {
   return (
     <div className="container">
       <h5>Có tổng cộng : {productList.length} sản phẩm</h5>
+      <div className="row ml-3 mt-3" style={{ textAlign: "right" }}>
+        <span>Search : </span>
+        <input
+          className="mb-4 search"
+          type={"text"}
+          placeholder="Search..."
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
+      </div>
       <Table striped bordered hover size="sm" responsive>
         <thead>
           <tr>
             <th>Product Name</th>
-            <th>CategoryID</th>
+            <th>Product Category</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Date</th>
@@ -75,74 +87,94 @@ function Product() {
               </td>
             </tr>
           ) : (
-            productList.map((item) => {
-              return (
-                <tr>
-                  <td>{item.productName}</td>
-                  <td>{item.idCategory}</td>
-                  <td>${item.productPrice}</td>
-                  <td>{item.Quantity}</td>
-                  <td>{moment(item.productDate).format("DD/MM/YYYY")}</td>
-                  <td>
-                    {item.productStatus === 1 ? "Published" : "Unpublish"}
-                  </td>
-                  <td>
-                    <Link to={"/detail"}>
-                      <Button onClick={() => setDataToStorage(item.idproduct)}>
-                        View
-                      </Button>
-                    </Link>
-                  </td>
-                  <td>
-                    <Link to={"/update"}>
+            productList
+              .filter((item) => {
+                if (searchItem == "") {
+                  return item;
+                } else if (
+                  item.productName
+                    .toLowerCase()
+                    .includes(searchItem.toLowerCase())
+                ) {
+                  return item;
+                }
+              })
+              .map((item) => {
+                return (
+                  <tr>
+                    <td>{item.productName}</td>
+                    <td>
+                      {item.idCategory === 1
+                        ? "Shirt"
+                        : item.idCategory === 2
+                        ? "Pant"
+                        : "Hat"}
+                    </td>
+                    <td>${item.productPrice}</td>
+                    <td>{item.Quantity}</td>
+                    <td>{moment(item.productDate).format("DD/MM/YYYY")}</td>
+                    <td>
+                      {item.productStatus === 1 ? "Published" : "Unpublish"}
+                    </td>
+                    <td>
+                      <Link to={"/detail"}>
+                        <Button
+                          onClick={() => setDataToStorage(item.idproduct)}
+                        >
+                          View
+                        </Button>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={"/update"}>
+                        <Button
+                          onClick={() => setDataToStorage(item.idproduct)}
+                          // onClick={() => setDataToStorage(item.id,item.title, item.price,item.quantity,item.date,item.status)}
+                          variant="warning"
+                        >
+                          Update
+                        </Button>
+                      </Link>
+                    </td>
+                    <td>
                       <Button
-                        onClick={() => setDataToStorage(item.idproduct)}
-                        // onClick={() => setDataToStorage(item.id,item.title, item.price,item.quantity,item.date,item.status)}
-                        variant="warning"
-                      >
-                        Update
-                      </Button>
-                    </Link>
-                  </td>
-                  <td>
-                    <Button
-                      //   onClick={() => {
-                      //     deleteProduct(item.idproduct);
-                      //   }}
-                      onClick={() => handleShow(item.idproduct)}
-                      variant="danger"
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Cảnh báo</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      Bạn đang thực hiện chức nẵng xóa sản phẩm có mã là {ide}
-                    </Modal.Body>
-                    <Modal.Body>
-                      Sản phẩm không thể khôi phục khi xóa thành công
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                        Hủy
-                      </Button>
-                      <Button
+                        //   onClick={() => {
+                        //     deleteProduct(item.idproduct);
+                        //   }}
+                        onClick={() => handleShow(item.idproduct)}
                         variant="danger"
-                        onClick={() => {
-                          deleteProduct(ide);
-                        }}
-                        //   onClick={() => deleteItem(ide)}
                       >
-                        Xóa
+                        Delete
                       </Button>
-                    </Modal.Footer>
-                  </Modal>
-                </tr>
-              );
-            })
+                    </td>
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Cảnh báo</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        Bạn đang thực hiện chức nẵng xóa sản phẩm có mã là {ide}
+                      </Modal.Body>
+                      <Modal.Body>
+                        Sản phẩm không thể khôi phục khi xóa thành công
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Hủy
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => {
+                            deleteProduct(ide);
+                          }}
+                          //   onClick={() => deleteItem(ide)}
+                        >
+                          Xóa
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </tr>
+                );
+              })
           )}
         </tbody>
       </Table>

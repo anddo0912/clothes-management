@@ -6,8 +6,8 @@ function Footer(props) {
     <footer className="section-p1 mt-auto">
       <div className="row container mx-auto pt-5 mt-3">
         <div className="footer-one col-lg-6 col-md-6 col-12">
-          <h5 className="pd-2 mb-3">MyShopping</h5>
-          <p>The best shop jdafafjfjfa jgndsndjfndsjfndsjnfjfnjn</p>
+          <h5 className="pd-2 mb-3">A2H Store</h5>
+          <p>Developed by two of the best</p>
         </div>
 
         <div className="footer-one col-lg-6 col-md-6 col-12">

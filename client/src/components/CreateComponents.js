@@ -61,11 +61,10 @@ function Create() {
     var files = event.target.files;
     var filesArray = [].slice.call(files);
     filesArray.forEach((event) => {
-      console.log(event.name.split('.')[0]);
-      const value = event.name.split('.')[0];
+      console.log(event.name.split(".")[0]);
+      const value = event.name.split(".")[0];
       setProductImage(value);
     });
-
   };
   const validateAll = () => {
     const msg = {};
@@ -141,9 +140,11 @@ function Create() {
             <button className="btn btn-success" onClick={() => history("/")}>
               Back
             </button>
-            <button className="btn btn-success" onClick={newTutorial}>
-              Add
-            </button>
+            <Link to={'/create'}>
+              <button className="btn btn-success" onClick={newTutorial}>
+                Add
+              </button>
+            </Link>
           </div>
         ) : (
           <div className="row">

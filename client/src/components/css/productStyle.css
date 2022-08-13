@@ -72,7 +72,10 @@ h1 {
 #productDetail #proDetail span{
     line-height: 25px;
 }
-
+.container .search {
+    align-items: flex-end;
+    
+}
 /* #productDetail img{
     height: 80vh;
 } */

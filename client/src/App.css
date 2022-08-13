@@ -39,3 +39,9 @@
 .container {
   padding-bottom:60px;
 }
+
+input .search {
+  /* text-align: right; */
+  justify-content: flex-end;
+  color: red;
+}

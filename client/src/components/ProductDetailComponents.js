@@ -51,23 +51,27 @@ function ProductDetail() {
             <div className="col-lg-6 col-md-6 col-12 mt-3" id="proDetail">
               <h4>Product Id:</h4>
               <h6>{product.idproduct} </h6>
-              <h4>Product Name:</h4>
-              <h6>{product.productName} </h6>
+
+              <h4>Product Date:</h4>
+              <h6>{moment(product.productDate).format("DD/MM/YYYY")}</h6>
 
               <h4>Product Status:</h4>
               <h6>
                 {product.productStatus === 1 ? "Published" : "UnPublished"}
               </h6>
+
               <h4>Product Price:</h4>
               <h6>${product.productPrice}</h6>
             </div>
             <div className="col-lg-6 col-md-6 col-12 mt-3" id="proDetail">
               {/* <h4>Product Description:</h4>
               <h6>{product.description}</h6> */}
-              <h4>Product Date:</h4>
-              <h6>{moment(product.productDate).format("DD/MM/YYYY")}</h6>
+              <h4>Product Name:</h4>
+              <h6>{product.productName} </h6>
+
               <h4>Product Quantity:</h4>
               <h6>{product.Quantity}</h6>
+              
               <h4>Product CategoryID:</h4>
               <h6>{product.idCategory}</h6>
             </div>

@@ -8,7 +8,7 @@ class Header extends Component {
     <React.Fragment>
       <Navbar sticky="top" id='header'>
         <div className="container-fluid">
-            <NavbarBrand href="/">MyShopping</NavbarBrand>
+            <NavbarBrand href="/">A2H Store</NavbarBrand>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
