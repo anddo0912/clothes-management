@@ -33,7 +33,12 @@ Your app is ready to be deployed!
 ### `npm start`
 
 ### Screenshot
-![DDT & TDD with JUnit](https://github.com/anddo0912/math-util/blob/main/images/DDT%20with%20JUnit.png)
+### Search Function
+![Search](https://github.com/anddo0912/clothes-management/blob/main/images/SearchPNG.PNG)
+### Update Function
+![Search](https://github.com/anddo0912/clothes-management/blob/main/images/Update.PNG)
+### Create Function
+![Search](https://github.com/anddo0912/clothes-management/blob/main/images/CreatePng.PNG)
 
 
 
